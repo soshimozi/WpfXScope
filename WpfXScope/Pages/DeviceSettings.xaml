@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="WpfXScope.Content.DeviceSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid Style="{StaticResource ContentRoot}">
+       <mui:ModernTab Layout="List" SelectedSource="/Content/DeviceSettingsHorizontal.xaml">
+            <mui:ModernTab.Links>
+                <mui:Link DisplayName="horizontal" Source="/Content/DeviceSettingsHorizontal.xaml" />
+                <mui:Link DisplayName="vertical" Source="/Pages/DeviceSettingsVertical.xaml" />
+                <mui:Link DisplayName="trigger" Source="/Pages/DeviceSettingsTrigger.xaml" />
+                <mui:Link DisplayName="display" Source="/Content/ScopeSettings.xaml" />
+            </mui:ModernTab.Links>
+        </mui:ModernTab>
+    </Grid>
+
+</UserControl>

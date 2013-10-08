@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="WpfXScope.Controls.XScopeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             x:Name="ScopeControl"
+             d:DesignHeight="579" d:DesignWidth="562" >
+    <StackPanel>
+        <Canvas ClipToBounds="True" Width="512" Height="512" Cursor="Cross" PreviewMouseDown="ScopeMouseDown" PreviewMouseUp="ScopeMouseUp" Name="ControlCanvas" MouseMove="ScopeMouseMove" MouseLeave="ControlCanvas_MouseLeave" MouseEnter="ControlCanvas_MouseEnter">
+        </Canvas>
+        <Grid Width="512" Margin="0 0 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label x:Name="Channel1Label" FontWeight="Bold">Ch1</Label>
+            <Label x:Name="Channel2Label" FontWeight="Bold" Grid.Column="1">Ch2</Label>
+            <Label x:Name="FrequencyLabel" FontWeight="Bold" Grid.Column="2">Time</Label>
+            <Label FontWeight="Bold" Grid.Column="3">Trigger</Label>
+        </Grid>
+        <StackPanel Orientation="Horizontal">
+            <Label Margin="5" x:Name="CursorX"></Label>
+            <Label Margin="5" x:Name="CursorY"></Label>
+        </StackPanel>
+        <ScrollBar Value="{Binding ScrollPosition, ElementName=ScopeControl, Mode=TwoWay}" x:Name="ScrollBarHPos" Width="512" Orientation="Horizontal" Maximum="127" Scroll="ScrollBarHPosScroll"></ScrollBar>
+    </StackPanel>
+</UserControl>

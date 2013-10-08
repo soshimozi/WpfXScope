@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="WpfXScope.Content.DeviceSettingsTriggerMode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Style="{StaticResource ContentRoot}">
+        <ScrollViewer>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                    <RowDefinition Height="25" />
+                </Grid.RowDefinitions>
+                <Image Height="20" Width="20" Source="/WpfXScope;component/Images/rising.png"></Image>
+                <RadioButton ToolTip="The trigger occurs when the signal crosses the trigger level from below to above." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=RisingEdge}" VerticalAlignment="Center" Grid.Column="1">Rising Edge</RadioButton>
+                <Image Height="20" Width="20" Grid.Row="1" Source="/WpfXScope;component/Images/falling.png"></Image>
+                <RadioButton ToolTip="The trigger occurs when the signal crosses the trigger level from above to below." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=FallingEdge}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">Falling Edge</RadioButton>
+                <Image Height="20" Width="20" Grid.Row="2" Source="/WpfXScope;component/Images/dual.png"></Image>
+                <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=DualEdge}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" ToolTip="The trigger occurs when the signal crosses the trigger level in any direction.">Dual Edge</RadioButton>
+                <Image Height="20" Width="20" Grid.Row="3" Source="/WpfXScope;component/Images/positive.png"></Image>
+                <RadioButton ToolTip="The trigger occurs when the difference between two consecutive samples is greater than the trigger value, positive slope." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=PositiveSlope}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1">Positive Slope</RadioButton>
+                <Image Height="20" Width="20" Grid.Row="4" Source="/WpfXScope;component/Images/negative.png"></Image>
+                <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=NegativeSlope}" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" ToolTip="The trigger occurs when the difference between two consecutive samples is greater than the trigger value, negative slope.">Negative Slope</RadioButton>
+                <Image Height="20" Width="20" Grid.Row="5" Source="/WpfXScope;component/Images/window.png"></Image>
+                <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Window}" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" ToolTip="The trigger occurs when the signal leaves a voltage range.">Window</RadioButton>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

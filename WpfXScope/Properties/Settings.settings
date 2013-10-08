@@ -1,0 +1,33 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WpfXScope.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AutoConnect" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DrawScopeLines" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ScopeBackground" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#00000000</Value>
+    </Setting>
+    <Setting Name="GridLineColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="Channel1Color" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF0000FF</Value>
+    </Setting>
+    <Setting Name="Channel2Color" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FFFFFFFF</Value>
+    </Setting>
+    <Setting Name="TickMarkColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#00000000</Value>
+    </Setting>
+    <Setting Name="DrawTickMarks" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DrawGridLines" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

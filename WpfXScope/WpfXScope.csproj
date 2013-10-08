@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D657FFD-8B57-49B9-BAFA-F19EDF1A0871}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfXScope</RootNamespace>
+    <AssemblyName>WpfXScope</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net40\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Windows.Shell">
+      <HintPath>..\packages\ModernUI.WPF.1.0.5\lib\net40\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\ColorChooser.xaml.cs">
+      <DependentUpon>ColorChooser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ChannelSettings.xaml.cs">
+      <DependentUpon>ChannelSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DeviceSettingsVerticalChannel1.xaml.cs">
+      <DependentUpon>DeviceSettingsVerticalChannel1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DeviceSettingsVerticalChannel2.xaml.cs">
+      <DependentUpon>DeviceSettingsVerticalChannel2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DeviceSettingsVerticalFFT.xaml.cs">
+      <DependentUpon>DeviceSettingsVerticalFFT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DeviceSettingsVerticalLogic.xaml.cs">
+      <DependentUpon>DeviceSettingsVerticalLogic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\DeviceSettingsVerticalRef.xaml.cs">
+      <DependentUpon>DeviceSettingsVerticalRef.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\WaveFormGeneration.xaml.cs">
+      <DependentUpon>WaveFormGeneration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Helpers\GeometryHelper.cs" />
+    <Compile Include="Controls\Helpers\ClipBorder.cs" />
+    <Compile Include="Controls\OnOffIndicator.xaml.cs">
+      <DependentUpon>OnOffIndicator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScopeScrollEventArgs.cs" />
+    <Compile Include="Controls\SpeechBubble.cs" />
+    <Compile Include="Controls\ToggleSwitch.cs" />
+    <Compile Include="Converters\HzKhzBooleanConverter.cs" />
+    <Compile Include="Models\PullUpType.cs" />
+    <Compile Include="Models\SettingsChangedEventArgs.cs" />
+    <Compile Include="Models\WaveformType.cs" />
+    <Compile Include="ViewModels\NotifyObject.cs" />
+    <Compile Include="ViewModels\DeviceSettingsViewModel.cs" />
+    <Compile Include="Content\DeviceSettingsHorizontal.xaml.cs">
+      <DependentUpon>DeviceSettingsHorizontal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DeviceSettingsTrigger.xaml.cs">
+      <DependentUpon>DeviceSettingsTrigger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DeviceSettings.xaml.cs">
+      <DependentUpon>DeviceSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DeviceSettingsVertical.xaml.cs">
+      <DependentUpon>DeviceSettingsVertical.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\ScopeSettings.xaml.cs">
+      <DependentUpon>ScopeSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\SettingsAppearance.xaml.cs">
+      <DependentUpon>SettingsAppearance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\FrequencyRange.cs" />
+    <Compile Include="Models\ImageData.cs" />
+    <Compile Include="ViewModels\ScopeSettingsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsAppearanceViewModel.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
+    <Compile Include="Models\DeviceSettingsManager.cs" />
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Device\DeviceManagement.cs" />
+    <Compile Include="Device\API\DeviceManagementAPI.cs" />
+    <Compile Include="Device\API\FileIOAPI.cs" />
+    <Compile Include="Models\DeviceModel.cs" />
+    <Compile Include="Models\TriggerSource.cs" />
+    <Compile Include="Pages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RoutableCommand.cs" />
+    <Compile Include="Models\ChannelMathType.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\TriggerMode.cs" />
+    <Compile Include="ViewModels\TriggerType.cs" />
+    <Compile Include="ViewModels\WaveformGenerationViewModel.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\XScopeControl.xaml.cs">
+      <DependentUpon>XScopeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Device\WinUsbDevice.cs" />
+    <Compile Include="Device\API\WinUsbDeviceApi.cs" />
+    <Page Include="Controls\ColorChooser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ChannelSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsHorizontal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsVerticalChannel1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsVerticalChannel2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsVerticalFFT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsVerticalLogic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\DeviceSettingsVerticalRef.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\WaveFormGeneration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\OnOffIndicator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DeviceSettingsTrigger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DeviceSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DeviceSettingsVertical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\ScopeSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\SettingsAppearance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Pages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\XScopeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\expo.png" />
+    <Resource Include="Images\led-off.png" />
+    <Resource Include="Images\led-on.png" />
+    <Resource Include="Images\noise.png" />
+    <Resource Include="Images\sine.png" />
+    <Resource Include="Images\square.png" />
+    <Resource Include="Images\triangle.png" />
+    <Resource Include="Images\wave-big.png" />
+    <Resource Include="Images\wave-small.png" />
+    <Resource Include="Images\zoom-in.png" />
+    <Resource Include="Images\zoom-out.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\colorgradient.png" />
+    <Resource Include="Images\dual.png" />
+    <Resource Include="Images\elastic.png" />
+    <Resource Include="Images\falling.png" />
+    <Resource Include="Images\GT-logo.png" />
+    <Resource Include="Images\longdecay.png" />
+    <Resource Include="Images\lowintense.png" />
+    <Resource Include="Images\negative.png" />
+    <Resource Include="Images\positive.png" />
+    <Resource Include="Images\rising.png" />
+    <Resource Include="Images\roll.png" />
+    <Resource Include="Images\shortdecay.png" />
+    <Resource Include="Images\veryintense.png" />
+    <Resource Include="Images\window.png" />
+    <Resource Include="Images\xy.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="WpfXScope.Content.DeviceSettingsHorizontal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ScrollViewer>
+            <StackPanel MinWidth="300">
+                <TextBlock Text="FREQUENCY" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+                <Slider Value="{Binding HorizontalFrequency}" Grid.Column="1" TickPlacement="BottomRight" Maximum="21"></Slider>
+
+                <TextBlock Text="ZOOM" Style="{StaticResource Heading2}" Margin="0,10,0,8" />
+                <Slider Grid.Column="1" TickPlacement="BottomRight" Maximum="255" TickFrequency="16"></Slider>
+
+                <TextBlock Text="CURSORS" Style="{StaticResource Heading2}" Margin="0,10,0,8" />
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/WpfXScope;component/Images/xy.png"></Image>
+                    <CheckBox VerticalAlignment="Center" Margin="5 0 10 0">XY Mode</CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/WpfXScope;component/Images/roll.png"></Image>
+                    <CheckBox VerticalAlignment="Center" Margin="5 0 10 0">Roll Mode</CheckBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/WpfXScope;component/Images/elastic.png"></Image>
+                    <CheckBox VerticalAlignment="Center" Margin="5 0 10 0">Elastic Trace</CheckBox>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

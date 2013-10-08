@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="WpfXScope.Content.DeviceSettingsVerticalChannel1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Properties="clr-namespace:WpfXScope.Properties"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <ScrollViewer MinWidth="200">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <Label>Position</Label>
+                    <Slider Margin="10 0 0 0" HorizontalAlignment="Center" Value="{Binding Channel1Offset}" Orientation="Vertical" TickPlacement="BottomRight" SmallChange="2" LargeChange="5" Height="256" TickFrequency="16" Minimum="-126" Maximum="0" Width="45" />
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="10 0 0 0" Orientation="Vertical">
+                            <Label>Gain</Label>
+                            <Slider HorizontalAlignment="Center" Value="{Binding Channel1Gain}" Orientation="Vertical" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" Height="128" TickFrequency="1" Minimum="0" Maximum="6" Width="45" />
+                        </StackPanel>
+                        <StackPanel Margin="10 15 0 0">
+                            <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1On}">Trace</CheckBox>
+                            <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Inv}">Invert</CheckBox>
+                            <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Avrg}">Average</CheckBox>
+                            <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Math}">Math</CheckBox>
+                            <StackPanel Margin="1 10 3 3" Orientation="Horizontal">
+                                <xctk:ColorPicker Width="20" Height="22" SelectedColor="{Binding Source={x:Static Properties:Settings.Default}, Path=Channel1Color}" VerticalAlignment="Center" DisplayColorAndName="False" ShowDropDownButton="False" />
+                                <Label Margin="5 0 0 0" VerticalAlignment="Center">Color</Label>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <GroupBox IsEnabled="{Binding Path=Channel1Math}" Margin="3 3 3 3" Header="Math">
+                        <StackPanel Margin="3 3 3 3" Orientation="Horizontal">
+                            <RadioButton Margin="3 3 3 3" IsChecked="{Binding Path=Channel1MathType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Subtract, Mode=TwoWay}">Sub</RadioButton>
+                            <RadioButton Margin="3 3 3 3" IsChecked="{Binding Path=Channel1MathType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Multiply, Mode=TwoWay}">Multiply</RadioButton>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
+
+        </ScrollViewer>
+    </Grid>
+</UserControl>

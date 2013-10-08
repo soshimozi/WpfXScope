@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="WpfXScope.Controls.OnOffIndicator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             x:Name="Indicator"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="OnOffLabelStyle" TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding OnState, ElementName=Indicator, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                    <Setter Property="Content" Value="{Binding OnStateContent, ElementName=Indicator}"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding OnState, ElementName=Indicator, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Content" Value="{Binding OffStateContent, ElementName=Indicator}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ButtonOnStyle" TargetType="Ellipse">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding OnState, ElementName=Indicator, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                    <Setter Property="Fill" Value="{Binding OnStateBackground, ElementName=Indicator}"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding OnState, ElementName=Indicator, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Fill" Value="{Binding OffStateBackground, ElementName=Indicator}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Ellipse Style="{StaticResource ButtonOnStyle}" Width="{Binding Radius, ElementName=Indicator}" Height="{Binding Radius, ElementName=Indicator}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        StrokeThickness="{Binding OuterBorderThickness, ElementName=Indicator}" Stroke="{Binding Stroke, ElementName=Indicator}">
+        </Ellipse>
+        </StackPanel>
+    </Grid>
+</UserControl>

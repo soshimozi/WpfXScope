@@ -1,0 +1,304 @@
+﻿<Window x:Class="WpfXScope.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:WpfXScope="clr-namespace:WpfXScope"
+        xmlns:cvt="clr-namespace:WpfXScope.Converters" xmlns:Properties="clr-namespace:WpfXScope.Properties"
+        xmlns:Controls="clr-namespace:WpfXScope.Controls" Title="XScope 3.1" Height="618" Width="976" Loaded="Window_Loaded" Closing="Window_Closing" ResizeMode="CanMinimize">
+    <Window.Resources>
+        <Style x:Key="VerticalAlignedCheckbox" TargetType="CheckBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+
+        <Style x:Key="OnOffImageStyle" TargetType="Image">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                    <Setter Property="Source" Value="/WpfXScope;component/Images/led-on.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Source"  Value="/WpfXScope;component/Images/led-off.png"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style x:Key="ConnectedLabelStyle" TargetType="Label">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                        <Setter Property="Content" Value="Connected"></Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                        <Setter Property="Content" Value="Not Connected"></Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        
+        <Controls:XScopeControl  
+            ScopeData="{Binding ScopeData}" 
+            Channel1Position="{Binding Channel1Pos}"
+            x:Name="ScopeControl" 
+            Grid.Column="0" 
+            Channel1Trace="{Binding Channel1On}"
+            RenderLines="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawScopeLines}"
+            Channel1Color="{Binding Source={x:Static Properties:Settings.Default}, Path=Channel1Color}"
+            ScopeBackgroundColor="{Binding Source={x:Static Properties:Settings.Default}, Path=ScopeBackground}" 
+            GridLineColor="{Binding Source={x:Static Properties:Settings.Default}, Path=GridLineColor}" />
+        
+        <TabControl Grid.Column="1" Width="420">
+            <TabItem Header="Oscilloscope" >
+                <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/WpfXScope;component/Images/wave-big.png" Margin="0 0 5 0"></Image>
+                                <Slider Value="{Binding SamplingRate}" Grid.Column="1" TickPlacement="BottomRight" Maximum="21"></Slider>
+                                <Image Grid.Column="2" Source="/WpfXScope;component/Images/wave-small.png" Margin="5 0 0 0"></Image>
+                            </Grid>
+                            <Grid Margin="5 5 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/WpfXScope;component/Images/zoom-out.png" Margin="0 0 5 0"></Image>
+                                <Slider Grid.Column="1" TickPlacement="BottomRight" Maximum="255" TickFrequency="16"></Slider>
+                                <Image Grid.Column="2" Source="/WpfXScope;component/Images/zoom-in.png" Margin="5 0 0 0"></Image>
+                            </Grid>
+                            <StackPanel Margin="0 10 0 10" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Image Source="/WpfXScope;component/Images/xy.png"></Image>
+                                <CheckBox Style="{StaticResource VerticalAlignedCheckbox}" Margin="5 0 10 0">XY Mode</CheckBox>
+                                <Image Source="/WpfXScope;component/Images/roll.png"></Image>
+                                <CheckBox Style="{StaticResource VerticalAlignedCheckbox}" VerticalAlignment="Center" Margin="5 0 10 0">Roll Mode</CheckBox>
+                                <Image Source="/WpfXScope;component/Images/elastic.png"></Image>
+                                <CheckBox Style="{StaticResource VerticalAlignedCheckbox}" Margin="5 0 10 0">Elastic Trace</CheckBox>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <DockPanel>
+                        <GroupBox Header="Vertical" Margin="0 0 5 0" Height="380" VerticalAlignment="Top">
+                            <TabControl>
+                                <TabItem Header="CH1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel>
+                                            <Label>Position</Label>
+                                            <Slider Margin="10 0 0 0" HorizontalAlignment="Center" Value="{Binding Channel1Pos}" Orientation="Vertical" TickPlacement="BottomRight" SmallChange="2" LargeChange="5" Height="256" TickFrequency="16" Minimum="-126" Maximum="0" Width="45" />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <StackPanel Margin="10 0 0 0" Orientation="Vertical">
+                                                    <Label>Gain</Label>
+                                                    <Slider HorizontalAlignment="Center" Value="{Binding Channel1Gain}" Orientation="Vertical" TickPlacement="BottomRight" SmallChange="1" LargeChange="5" Height="128" TickFrequency="1" Minimum="0" Maximum="6" Width="45" />
+                                                </StackPanel>
+                                                <StackPanel Margin="10 15 0 0">
+                                                    <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1On}">Trace</CheckBox>
+                                                    <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Inv}">Invert</CheckBox>
+                                                    <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Avrg}">Average</CheckBox>
+                                                    <CheckBox Margin="3 10 3 3" IsChecked="{Binding Channel1Math}">Math</CheckBox>
+                                                    <StackPanel Margin="1 10 3 3" Orientation="Horizontal">
+                                                        <xctk:ColorPicker Width="20" Height="22" SelectedColor="{Binding Source={x:Static Properties:Settings.Default}, Path=Channel1Color}" DisplayColorAndName="False" ShowDropDownButton="False" />
+                                                        <Label>Color</Label>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </StackPanel>
+                                            <GroupBox IsEnabled="{Binding Path=Channel1Math}" Margin="3 3 3 3" Header="Math">
+                                                <StackPanel Margin="3 3 3 3" Orientation="Horizontal">
+                                                    <RadioButton Margin="3 3 3 3" IsChecked="{Binding Path=Channel1MathType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Subtract}">Sub</RadioButton>
+                                                    <RadioButton Margin="3 3 3 3" IsChecked="{Binding Path=Channel1MathType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Multiply}">Multiply</RadioButton>
+                                                </StackPanel>
+                                            </GroupBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem Header="CH2">
+                                </TabItem>
+                                <TabItem Header="LOGIC">
+                                </TabItem>
+                                <TabItem Header="FFT">
+                                </TabItem>
+                                <TabItem Header="REF">
+                                </TabItem>
+                            </TabControl>
+                        </GroupBox>
+                        <GroupBox Header="Trigger" Height="380" VerticalAlignment="Top">
+                            <StackPanel>
+                                <DockPanel>
+                                    <GroupBox Header="Source">
+                                        <ComboBox ItemsSource="{Binding TriggerSources}" SelectedValuePath="Value" DisplayMemberPath="Display" SelectedValue="{Binding ChannelTrigger}" Width="70" Margin="5 5 5 5"></ComboBox>
+                                    </GroupBox>
+                                    <Button Width="50" Command="{Binding ForceCommand}">Force</Button>
+                                </DockPanel>
+                                <GroupBox Header="Mode" Margin="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="25" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                            <RowDefinition Height="25" />
+                                        </Grid.RowDefinitions>
+                                        <Image Height="20" Width="20" Source="/WpfXScope;component/Images/rising.png"></Image>
+                                        <RadioButton ToolTip="The trigger occurs when the signal crosses the trigger level from below to above." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=RisingEdge}" VerticalAlignment="Center" Grid.Column="1">Rising Edge</RadioButton>
+                                        <Image Height="20" Width="20" Grid.Row="1" Source="/WpfXScope;component/Images/falling.png"></Image>
+                                        <RadioButton ToolTip="The trigger occurs when the signal crosses the trigger level from above to below." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=FallingEdge}" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">Falling Edge</RadioButton>
+                                        <Image Height="20" Width="20" Grid.Row="2" Source="/WpfXScope;component/Images/dual.png"></Image>
+                                        <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=DualEdge}" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" ToolTip="The trigger occurs when the signal crosses the trigger level in any direction.">Dual Edge</RadioButton>
+                                        <Image Height="20" Width="20" Grid.Row="3" Source="/WpfXScope;component/Images/positive.png"></Image>
+                                        <RadioButton ToolTip="The trigger occurs when the difference between two consecutive samples is greater than the trigger value, positive slope." IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=PositiveSlope}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1">Positive Slope</RadioButton>
+                                        <Image Height="20" Width="20" Grid.Row="4" Source="/WpfXScope;component/Images/negative.png"></Image>
+                                        <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=NegativeSlope}" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" ToolTip="The trigger occurs when the difference between two consecutive samples is greater than the trigger value, negative slope.">Negative Slope</RadioButton>
+                                        <Image Height="20" Width="20" Grid.Row="5" Source="/WpfXScope;component/Images/window.png"></Image>
+                                        <RadioButton IsChecked="{Binding Path=ChannelTriggerMode, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Window}" VerticalAlignment="Center" Grid.Row="5" Grid.Column="1" ToolTip="The trigger occurs when the signal leaves a voltage range.">Window</RadioButton>
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header="Type" Margin="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="80"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20" />
+                                        </Grid.RowDefinitions>
+
+                                        <RadioButton ToolTip="Trace continuously ignoring the trigger." IsChecked="{Binding Path=ChannelTriggerType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Free}" Grid.Column="0">Free</RadioButton>
+                                        <RadioButton ToolTip="Trace only when the trigger event occurs." IsChecked="{Binding Path=ChannelTriggerType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Normal}" Grid.Column="1">Normal</RadioButton>
+                                        <RadioButton ToolTip="Trace when the trigger event occurs, or after the Auto trigger timeout." IsChecked="{Binding Path=ChannelTriggerType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Auto}" Grid.Column="0" Grid.Row="1">Auto</RadioButton>
+                                        <RadioButton ToolTip="Only one trace is displayed when the trigger event occurs." IsChecked="{Binding Path=ChannelTriggerType, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Single}" Grid.Column="1" Grid.Row="1">Single</RadioButton>
+                                        
+                                    </Grid>
+                                </GroupBox>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                                    <Label ToolTip="Trigger Timeout: Delay before generating an automatic trigger, when the trigger Type is set to Auto.">Auto</Label>
+                                    <ComboBox ToolTip="Trigger Timeout: Delay before generating an automatic trigger, when the trigger Type is set to Auto." Width="100"></ComboBox>
+                                    <Label>mS</Label>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label ToolTip="Time to wait before detecting the next trigger.">Hold</Label>
+                                    <ComboBox Width="100" ToolTip="Time to wait before detecting the next trigger."></ComboBox>
+                                    <Label>mS</Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </DockPanel>
+                    
+                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" Height="54">
+                        <Button VerticalAlignment="Bottom" Margin="5" Width="65">Save</Button>
+                        <Button VerticalAlignment="Bottom" Margin="5" Width="65">Record</Button>
+                        <Button VerticalAlignment="Bottom" Margin="5" Width="65">Play</Button>
+                        <DockPanel HorizontalAlignment="Right" Width="185">
+                            <ToggleButton VerticalAlignment="Bottom" DockPanel.Dock="Right" Command="{Binding StopCommand}" IsChecked="{Binding IsScopeStopped}" Width="65" Margin="5">Stop</ToggleButton>
+                            <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" Width="65">Auto</Button>
+                        </DockPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Arbitrary Waveform Generator">
+                
+            </TabItem>
+            <TabItem Header="Protocol Sniffer">
+
+            </TabItem>
+            <TabItem Header="Options">
+                <StackPanel>
+                    <GroupBox Margin="5" Header="File">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button Width="79" Margin="5">Load Wave</Button>
+                            <Button Width="79" Margin="5">Save Wave</Button>
+                            <Button Width="79" Margin="5">Save BMP</Button>
+                            <Button Width="79" Margin="5">Save CSV</Button>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Margin="4" Header="Display">
+                        <StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                    <ColumnDefinition Width="290"></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Right">Intensity</Label>
+                                <Image HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="24" Source="/WpfXScope;component/Images/lowintense.png"></Image>
+                                <Slider Grid.Row="1" Grid.RowSpan="2" TickPlacement="BottomRight" TickFrequency="10" Grid.Column="1" Width="288" Height="21" Maximum="100" Minimum="0" VerticalAlignment="Bottom" Margin="6,0,6,10"></Slider>
+                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Height="24" Width="24" Source="/WpfXScope;component/Images/veryintense.png"></Image>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                    <ColumnDefinition Width="290"></ColumnDefinition>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label HorizontalAlignment="Right">Intensity</Label>
+                                <Image HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Row="1" Height="24" Width="24" Source="/WpfXScope;component/Images/shortdecay.png"></Image>
+                                <Slider Grid.Row="1" Grid.RowSpan="2" TickPlacement="BottomRight" TickFrequency="10" Grid.Column="1" Width="288" Height="21" Maximum="100" Minimum="0" VerticalAlignment="Bottom" Margin="6,0,6,10"></Slider>
+                                <Image HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Height="24" Width="24" Source="/WpfXScope;component/Images/longdecay.png"></Image>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Margin="10 0 10 0" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawScopeLines, Mode=TwoWay}" VerticalAlignment="Center">Vectors</CheckBox>
+                                <xctk:ColorPicker SelectedColor="{Binding Source={x:Static Properties:Settings.Default}, Path=ScopeBackground, Mode=TwoWay}" DisplayColorAndName="False" IsOpen="False" ShowDropDownButton="False" Width="23" Height="23"></xctk:ColorPicker>
+                                <Label>Background Color</Label>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Connection">
+                        <StackPanel>
+                            <Grid Margin="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AutoConnect, Mode=TwoWay}"  VerticalAlignment="Center">Connect At Startup</CheckBox>
+                                <Button HorizontalAlignment="Left" Grid.Row="1" Width="75" Height="25" Command="{Binding ConnectCommand}">Connect</Button>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                                    <Image Height="22" Width="22" HorizontalAlignment="Right" Style="{StaticResource OnOffImageStyle}"></Image>
+                                    <Label HorizontalAlignment="Right" Style="{StaticResource ConnectedLabelStyle}" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Margin="5" Header="Device Firmware">
+                        <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Label Margin="0 0 10 0">Current Version:</Label>
+                            <TextBlock Margin="0 0 10 0" Width="54"></TextBlock>
+                            <Label Margin="0 0 10 0">Latest Version:</Label>
+                            <TextBlock Margin="0 0 10 0" Width="54"></TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                    <WpfXScope:CustomControl1></WpfXScope:CustomControl1>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

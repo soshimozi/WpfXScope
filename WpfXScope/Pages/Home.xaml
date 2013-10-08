@@ -1,0 +1,167 @@
+﻿<UserControl x:Class="WpfXScope.Pages.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Properties="clr-namespace:WpfXScope.Properties" xmlns:Controls="clr-namespace:WpfXScope.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="615" d:DesignWidth="740">
+    
+    <UserControl.Resources>
+        <Style x:Key="ConnectedLabelStyle" TargetType="Label">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                    <Setter Property="Content" Value="Connected"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsConnected, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                    <Setter Property="Content" Value="Not Connected"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <LinearGradientBrush x:Key="ToggleSwitchBackground" EndPoint="0,1"
+                                     StartPoint="0,0">
+            <GradientStop Color="#FF8D0717"
+                                  Offset="0.1" />
+            <GradientStop Color="#FFA70909"
+                                  Offset="0.5" />
+            <GradientStop Color="#FFFF0A1C"
+                                  Offset="1" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="ToggleSwitchCheckedBackground" EndPoint="0,1"
+                                     StartPoint="0,0">
+            <GradientStop Color="#FF1EA51E"
+                                  Offset="0" />
+            <GradientStop Color="#FF3DEA2F"
+                                  Offset="0.5" />
+            <GradientStop Color="#FF62FE6E"
+                                  Offset="1" />
+        </LinearGradientBrush>
+
+    </UserControl.Resources>
+    
+    <Grid>
+        <ScrollViewer>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel MinWidth="200">
+                    <Controls:XScopeControl 
+                        x:Name="XScope" 
+                        ScrollPosition="{Binding HorizontalPosition, Mode=TwoWay}"
+                        ChannelDTrace="{Binding ChannelDOn}"
+                        Channel1Position="{Binding Channel1Offset}" 
+                        Channel1Trace="{Binding Channel1On}"
+                        Channel2Position="{Binding Channel2Offset}"
+                        Channel2Trace="{Binding Channel2On}"
+                        ScopeData="{Binding ScopeData, Mode=OneWay}"
+                        Channel1Gain="{Binding Channel1Gain}"
+                        Channel2Gain="{Binding Channel2Gain}"
+                        DrawGridLines="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawGridLines}"
+                        DrawTickMarks="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawTickMarks}"
+                        SamplingRate="{Binding HorizontalFrequency}"
+                        RenderLines="{Binding Source={x:Static Properties:Settings.Default}, Path=DrawScopeLines}"
+                        Channel1Color="{Binding Source={x:Static Properties:Settings.Default}, Path=Channel1Color}"
+                        Channel2Color="{Binding Source={x:Static Properties:Settings.Default}, Path=Channel2Color}"
+                        ScopeBackgroundColor="{Binding Source={x:Static Properties:Settings.Default}, Path=ScopeBackground}" 
+                        GridLineColor="{Binding Source={x:Static Properties:Settings.Default}, Path=GridLineColor}" />
+                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Controls:ToggleSwitch 
+                        BorderThickness="2" 
+                        CheckedBackground="{StaticResource ToggleSwitchCheckedBackground}" 
+                        UncheckedBackground="{StaticResource ToggleSwitchBackground}" 
+                        ThumbCornerRadius="7" 
+                        ThumbBorderThickness="2"
+                        ThumbGlowColor="Gray"
+                        ThumbShineCornerRadius="6,6,3,3"
+                        UncheckedText="Start" 
+                        CornerRadius="10" 
+                        CheckedText="Stop" 
+                        ThumbWidth="30" 
+                        Height="30" 
+                        Width="105" 
+                        Margin="15 5 5 5" 
+                        HorizontalAlignment="Right"  
+                        IsChecked="{Binding IsScopeStopped}">
+                        <Controls:ToggleSwitch.BorderBrush>
+                            <LinearGradientBrush EndPoint="0,1"
+                                     StartPoint="0,0">
+                                <GradientStop Color="#F6F6F6"
+                                  Offset="0" />
+                                <GradientStop Color="#959595"
+                                  Offset="0.5" />
+                                <GradientStop Color="#565656"
+                                  Offset="1" />
+                            </LinearGradientBrush>
+                        </Controls:ToggleSwitch.BorderBrush>
+                        <Controls:ToggleSwitch.ThumbBackground>
+                            <LinearGradientBrush EndPoint="0,1"
+                                     StartPoint="0,0">
+                                <GradientStop Color="#C1C1C1"
+                                  Offset="0" />
+                                <GradientStop Color="#A5A5A5"
+                                  Offset="0.5" />
+                                <GradientStop Color="#FCFCF6"
+                                  Offset="1" />
+                            </LinearGradientBrush>
+                        </Controls:ToggleSwitch.ThumbBackground>
+                        <Controls:ToggleSwitch.ThumbBorderBrush>
+                            <LinearGradientBrush EndPoint="0,1"
+                                     StartPoint="0,0">
+                                <GradientStop Color="#F6F6F6"
+                                  Offset="0" />
+                                <GradientStop Color="#959595"
+                                  Offset="0.5" />
+                                <GradientStop Color="#565656"
+                                  Offset="1" />
+                            </LinearGradientBrush>
+                        </Controls:ToggleSwitch.ThumbBorderBrush>
+                    </Controls:ToggleSwitch>
+                    <!--<ToggleButton Height="25" Width="85" Margin="5" HorizontalAlignment="Right" IsChecked="{Binding IsScopeStopped}">Stop</ToggleButton>-->
+                    <Button Margin="5" HorizontalAlignment="Left" Grid.Column="1" Height="25" Width="85" Command="{Binding AutoCommand}">Auto</Button>
+                    <Button Grid.Row="1" Margin="5" Width="85" Height="25" Command="{Binding ConnectCommand}">Connect</Button>
+                    <CheckBox HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Margin="5" IsChecked="{Binding Source={x:Static Properties:Settings.Default}, Path=AutoConnect, Mode=TwoWay}"  VerticalAlignment="Center">Connect At Startup</CheckBox>
+                    <StackPanel Margin="20 4 4 4" Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
+                        <Controls:OnOffIndicator Radius="20" OuterBorderThickness="2" OnState="{Binding IsConnected}">
+                            <Controls:OnOffIndicator.OffStateBackground>
+                                <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,.5">
+                                    <GradientStop Offset="1" Color="#7E620009"></GradientStop>
+                                    <GradientStop Offset="1" Color="#90B20000"></GradientStop>
+                                </LinearGradientBrush>
+                            </Controls:OnOffIndicator.OffStateBackground>
+                            <Controls:OnOffIndicator.OnStateBackground>
+                                <LinearGradientBrush StartPoint=".5,0" EndPoint=".5,.5">
+                                    <GradientStop Offset="1" Color="#7E096109"></GradientStop>
+                                    <GradientStop Offset="1" Color="#900CB100"></GradientStop>
+                                </LinearGradientBrush>
+                            </Controls:OnOffIndicator.OnStateBackground>
+                            <Controls:OnOffIndicator.Stroke>
+                                <LinearGradientBrush EndPoint="0,0"
+                                     StartPoint="0,1">
+                                    <GradientStop Color="#A1A1A1"
+                                  Offset="0.5" />
+                                    <GradientStop Color="#959595"
+                                  Offset="0" />
+                                    <GradientStop Color="#555555"
+                                  Offset="1" />
+                                </LinearGradientBrush>
+                            </Controls:OnOffIndicator.Stroke>
+                        </Controls:OnOffIndicator>
+                        <!--<Image VerticalAlignment="Center" Margin="5" Height="22" Width="22" HorizontalAlignment="Right" Style="{StaticResource OnOffImageStyle}"></Image>-->
+                        <Label HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource ConnectedLabelStyle}" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
+
